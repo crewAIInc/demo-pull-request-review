@@ -69,7 +69,6 @@ generate_review_comment_task:
     code review comment. Include code quality findings, historical context from related PRs,
     implications for related files, and specific improvement suggestions.
   expected_output: A detailed but to the point, markdown-formatted code review comment that includes
-    - Summary of key findings
     - Specific code improvements with examples
     - Links to historical context and learnings from related PRs
     - Don't include '```markdown' in the output

@@ -5,12 +5,9 @@ description = "code_review_crew_for_github_pull_request using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
-    "crewai[tools] @ git+https://github.com/crewAIInc/crewAI.git@main",
+    "crewai[tools]>=0.83.0,<1.0.0",
     "pygithub>=2.5.0",
 ]
-
-[tool.hatch.metadata]
-allow-direct-references = true
 
 [project.scripts]
 code_review_crew_for_github_pull_request = "code_review_crew_for_github_pull_request.main:run"

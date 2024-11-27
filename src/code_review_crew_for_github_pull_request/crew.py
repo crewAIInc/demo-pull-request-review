@@ -1,5 +1,5 @@
 from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task, before_crew
+from crewai.project import CrewBase, agent, crew, task, before_kickoff, after_kickoff
 from crewai_tools import ScrapeWebsiteTool
 from .tools.github_tools import (
     FetchPRFilesTool,
@@ -11,10 +11,15 @@ from .tools.github_tools import (
 class CodeReviewCrewForGithubPullRequestCrew():
     """CodeReviewCrewForGithubPullRequest crew"""
 
-    @before_crew
+    @before_kickoff
     def load_files_changed(self, inputs):
         self.files_changed = FetchPRFilesTool().run(inputs['pr_patch_url'])
         inputs['files_changed'] = self.files_changed
+        return inputs
+
+    @after_kickoff
+    def add_disclaimer(self, inputs):
+        inputs['raw'] = f"This review was made by a Crew.\n\n{inputs['raw']}"
         return inputs
 
     @agent

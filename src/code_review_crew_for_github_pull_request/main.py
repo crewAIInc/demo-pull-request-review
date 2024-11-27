@@ -13,11 +13,13 @@ def run():
     Run the crew.
     """
     inputs = {
-        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1627.patch',
+        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1638.patch',
         'repo_name': 'crewAIInc/crewAI',
         'files_changed': ''
     }
-    CodeReviewCrewForGithubPullRequestCrew().kickoff(inputs=inputs)
+    files_changed = FetchPRFilesTool().run(inputs['pr_patch_url'])
+    inputs['files_changed'] = files_changed
+    CodeReviewCrewForGithubPullRequestCrew().crew().kickoff(inputs=inputs)
 
 
 def train():
